@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WriteRealTime</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+    <header>
+        <h1 class="title">WriteRealTime</h1>
+        
+        <hr class="separator">
+
+        <div class="menu">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="zoneWrite">
+            <p>Hola!, escribe algo ...</p>
+            <form id="formWrite">
+                <input type="text" placeholder="Hola" name="text" id="fieldText">
+                <input type="submit" value="Enviar" id="btnSubmit">
+            </form>
+        </div>
+
+        <div id="zoneOnline">
+            <!-- <p class="yo"> <span>Hola</span> </p>
+            <p class="friend"> <span>Que tal</span> </p> -->
+
+        </div>
+
+
+    </main>
+
+
+
+
+    
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    
+        var socket = io.connect('http://localhost:3000')
+
+        
+        var formWrite = $('#formWrite')
+        var fieldText = $('#fieldText')
+        var zoneOnline = $('#zoneOnline')
+        
+        var text = ''
+
+        socket.on('server_hello', function(data){
+            console.log(data)
+        })
+
+        socket.on('receiveMessage', function(message){
+            zoneOnline.append(`<p class="friend"> <span>${message.message}</span></p>`)
+        })
+
+
+        formWrite.on('submit', function(e){
+            e.preventDefault()
+
+            text = fieldText.val()
+
+            if(text){
+                socket.emit('sendMessage', {message: text})
+                zoneOnline.append(`<p class="yo"> <span>${text}</span> </p>`)
+            }
+        })
+
+
+
+    </script>
+
+</body>
+</html>
