@@ -55,6 +55,7 @@ main .zoneWrite form{
     padding: 15px 0;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 main .zoneWrite form #fieldText{
@@ -77,7 +78,7 @@ main .zoneWrite form #btnSubmit{
 main #zoneOnline{
     margin-top: 30px;
     background: #fafafa;
-    min-height: 300px;
+    min-height: 1000px;
     width: 100%;
     max-width: 100%;
     padding: 20px;

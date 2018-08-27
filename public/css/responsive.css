@@ -1,0 +1,12 @@
+@media screen and (max-width: 430px) {
+    main .zoneWrite #formWrite #fieldText{
+        width: 100%;
+    }
+    
+    main .zoneWrite #formWrite #btnSubmit{
+        width: 40%;
+        margin: 15px auto;
+        padding: 15px 5px;
+        border-radius: 3px;
+    }
+}
