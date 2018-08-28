@@ -28,17 +28,29 @@
 
     <main>
 
+        <div class="zoneName">
+            <form id="formName">
+                <input type="text" placeholder="Tu nombre" name="name" id="fieldName">
+                <input type="submit" value="Listo" id="btnSubmitName">
+            </form>
+        </div>
+
         <div class="zoneWrite">
-            <p>Hola!, escribe algo ...</p>
+            <p>Conversa con todo el mundo!</p>
             <form id="formWrite">
-                <input type="text" placeholder="Hola" name="text" id="fieldText">
+                <input type="text" placeholder="Hola!, escribe algo ..." name="text" id="fieldText">
                 <input type="submit" value="Enviar" id="btnSubmit">
             </form>
         </div>
 
         <div id="zoneOnline">
-            <!-- <p class="yo"> <span>Hola</span> </p>
-            <p class="friend"> <span>Que tal</span> </p> -->
+            
+            <!-- <div class="message" style="text-align:right"><p class="yo"> 
+                    <span class="name">Nicolas</span>
+                    <span class="text">asdadsdasdas</span>
+                    <span class="date">00 00 00</span>
+            </p></div>` -->
+
 
         </div>
 
@@ -58,10 +70,23 @@
     
         var socket = io()
 
-        
+
         var formWrite = $('#formWrite')
         var fieldText = $('#fieldText')
         var zoneOnline = $('#zoneOnline')
+            zoneOnline.slideToggle()
+
+        var formName = $('#formName')
+        var name = ''
+        
+        formName.on('submit', function(e){
+            e.preventDefault()
+
+            name = $('#fieldName').val()
+            zoneOnline.slideToggle()
+        })
+        
+        
         
         var text = ''
 
@@ -70,7 +95,11 @@
         })
 
         socket.on('receiveMessage', function(message){
-            zoneOnline.append(`<p class="friend"> <span>${message.message}</span></p>`)
+            zoneOnline.append(`<div class="message" style="text-align:left"><p class="friend"> 
+                                    <span class="name">${message.name}</span>
+                                    <span class="text">${message.text}</span>
+                                    <span class="date">${message.date}</span>
+                                   </p></div>`)
         })
 
 
@@ -78,12 +107,22 @@
             e.preventDefault()
 
             text = fieldText.val()
+            fieldText.val('')
 
             if(text){
-                socket.emit('sendMessage', {message: text})
-                zoneOnline.append(`<p class="yo"> <span>${text}</span> </p>`)
+                socket.emit('sendMessage', {name, text, date: dateNow()})
+                zoneOnline.append(`<div class="message" style="text-align:right"><p class="yo"> 
+                                    <span class="name">${name}</span>
+                                    <span class="text">${text}</span>
+                                    <span class="date">${dateNow()}</span>
+                                   </p></div>`)
             }
         })
+
+        function dateNow(){
+            let date = new Date()
+            return `${date.getHours()}:${date.getMinutes()}` 
+        }
 
 
 

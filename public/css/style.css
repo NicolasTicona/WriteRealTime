@@ -41,6 +41,41 @@ main{
     margin: 40px auto;
 }
 
+main .zoneName{
+    padding: 20px;
+}
+
+main .zoneName form{
+    width: 100%;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+main .zoneName form #fieldName{
+    padding: 10px;
+    font-size: 20px;
+
+    border: none;
+    border-bottom: 1.5px solid rgba(38, 45, 55, .8);
+    outline: none;
+    margin: 10px 0;
+}
+
+main .zoneName form #btnSubmitName{
+    background: #1aee61;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 22px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: none;
+}
+
 main .zoneWrite{
     padding: 20px;
 }
@@ -77,37 +112,53 @@ main .zoneWrite form #btnSubmit{
 
 main #zoneOnline{
     margin-top: 30px;
-    background: #fafafa;
+    background: #f3f3f3;
     min-height: 1000px;
     width: 100%;
     max-width: 100%;
     padding: 20px;
 }
 
-main #zoneOnline p {
-    margin: 40px 0;
+main #zoneOnline .message {
+    margin: 30px 0;
 }
 
-main #zoneOnline p.yo {
-    text-align: left;
-}
-
-main #zoneOnline p.friend {
-    text-align: right;
-}
-
-main #zoneOnline p span{
+main #zoneOnline .message p{
+    display: inline-block;
     font-size: 18px;
-    color: #262d37;
-    padding: 10px 20px;
-    border-radius: 10px;
+    color: #fff;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+main #zoneOnline .message p.yo {
+    text-align: left;
+    background: #fff;
+}
+main #zoneOnline .message p.yo .text {
+    color: rgb(38, 45, 55);
+}
+
+main #zoneOnline .message p.friend {
+    text-align: left;
+    background: rgb(38, 45, 55);
+}
+main #zoneOnline .message p.friend .text {
     color: #fff;
 }
 
-main #zoneOnline p.yo span{
-    background: rgb(38, 45, 55);
+main #zoneOnline .message p .name {
+    display: block;
+    font-size: 15px;
+    color: rgb(141, 141, 141);
 }
 
-main #zoneOnline p.friend span{
-    background: rgb(57, 132, 236);
+main #zoneOnline .message p .text {
+    display: block;
+}
+
+main #zoneOnline .message p .date {
+    display: block;
+    font-size: 12px;
+    color: rgb(141, 141, 141);
 }
