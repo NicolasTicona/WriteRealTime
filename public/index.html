@@ -30,7 +30,7 @@
 
         <div class="zoneName">
             <form id="formName">
-                <input type="text" placeholder="Tu nombre" name="name" id="fieldName">
+                <input type="text" placeholder="Tu nombre" name="name" autofocus autocomplete="false" id="fieldName">
                 <input type="submit" value="Listo" id="btnSubmitName">
             </form>
         </div>
@@ -39,7 +39,7 @@
             <p>Conversa con todo el mundo!</p>
             <form id="formWrite">
                 <input type="text" placeholder="Hola!, escribe algo ..." name="text" id="fieldText">
-                <input type="submit" value="Enviar" id="btnSubmit">
+                <input type="submit" value="Enviar" id="btnSubmit" autocomplete="false">
             </form>
         </div>
 
@@ -66,67 +66,7 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>    
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-    
-        var socket = io()
-
-
-        var formWrite = $('#formWrite')
-        var fieldText = $('#fieldText')
-        var zoneOnline = $('#zoneOnline')
-            zoneOnline.slideToggle()
-
-        var formName = $('#formName')
-        var name = ''
-        
-        formName.on('submit', function(e){
-            e.preventDefault()
-
-            name = $('#fieldName').val()
-            zoneOnline.slideToggle()
-        })
-        
-        
-        
-        var text = ''
-
-        socket.on('server_hello', function(data){
-            console.log(data)
-        })
-
-        socket.on('receiveMessage', function(message){
-            zoneOnline.append(`<div class="message" style="text-align:left"><p class="friend"> 
-                                    <span class="name">${message.name}</span>
-                                    <span class="text">${message.text}</span>
-                                    <span class="date">${message.date}</span>
-                                   </p></div>`)
-        })
-
-
-        formWrite.on('submit', function(e){
-            e.preventDefault()
-
-            text = fieldText.val()
-            fieldText.val('')
-
-            if(text){
-                socket.emit('sendMessage', {name, text, date: dateNow()})
-                zoneOnline.append(`<div class="message" style="text-align:right"><p class="yo"> 
-                                    <span class="name">${name}</span>
-                                    <span class="text">${text}</span>
-                                    <span class="date">${dateNow()}</span>
-                                   </p></div>`)
-            }
-        })
-
-        function dateNow(){
-            let date = new Date()
-            return `${date.getHours()}:${date.getMinutes()}` 
-        }
-
-
-
-    </script>
+    <script src="js/chatOperation.js"></script>
 
 </body>
 </html>

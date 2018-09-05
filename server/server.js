@@ -1,11 +1,21 @@
 const express = require('express')
 const app = express()
 const server = require('http').Server(app)
+
 const io = require('socket.io')(server)
+
+const bodyParser = require('body-parser')
 
 
 // Statics
 app.use(express.static('public'))
+
+// Middlewares
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+
+// Routes
+app.use(require('./routes/message/message.route'))
 
 // Socket
 io.on('connection', (client) => {
@@ -23,7 +33,8 @@ io.on('connection', (client) => {
     })
 })
 
-
+// Connect DB
+require('./db/connection')
 
 // Listennig
 server.listen(process.env.PORT || 3000, () =>{

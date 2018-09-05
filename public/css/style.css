@@ -113,7 +113,7 @@ main .zoneWrite form #btnSubmit{
 main #zoneOnline{
     margin-top: 30px;
     background: #f3f3f3;
-    min-height: 1000px;
+    min-height: 2000px;
     width: 100%;
     max-width: 100%;
     padding: 20px;

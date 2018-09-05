@@ -10,7 +10,10 @@
   "author": "Nicolas Ticona Valdivia <nikolasgamertv@gmail.com> (https://twitter.com/nicolas_tvop)",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "mongoose": "^5.2.10",
     "socket.io": "^2.1.1"
   }
 }
