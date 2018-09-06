@@ -11,9 +11,18 @@ const chatSchema = new Schema({
                 body: String
             }
         }
-    ]
+    ],
+    enabled: {default: true, type: Boolean}
 })
 
 const ChatModel = mongoose.model('conversation', chatSchema)
+
+ChatModel.deleteOne({enabled: true}, (err) => {
+    if (err) return err
+})
+
+ChatModel.create({conversation: [], enabled: true}, (err, conversation) => {
+    if (err) return err
+})
 
 module.exports = ChatModel

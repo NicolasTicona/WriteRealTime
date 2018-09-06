@@ -33,6 +33,8 @@ var socket = io()
 
             name = $('#fieldName').val()
             zoneOnline.show()
+
+            loadMessagesDB(name)
         })
         // ===============================
         
@@ -42,11 +44,8 @@ var socket = io()
 
         // Listen Message
         socket.on('receiveMessage', (message) =>{
-            zoneOnline.append(`<div class="message" style="text-align:left"><p class="friend"> 
-                                    <span class="name">${message.name}</span>
-                                    <span class="text">${message.text}</span>
-                                    <span class="date">${message.date}</span>
-                                   </p></div>`)
+            
+            renderMessage(message, 'friend')                                   
         })
 
 
@@ -66,31 +65,71 @@ var socket = io()
                 }
 
                 addMessageDB(message)
-                    // .then( (res) => {
-                    //     console.log('Message Send OK');
-                    //     console.log(res)
-                    // })
-
-                    // .catch( (err) => {
-                    //     console.log('Message Send BAD!')
-                    //     console.log(err);
-                    // })
-
-                socket.emit('sendMessage', {name, text, date: dateNow()})
-                zoneOnline.append(`<div class="message" style="text-align:right"><p class="yo"> 
-                                    <span class="name">${name}</span>
-                                    <span class="text">${text}</span>
-                                    <span class="date">${dateNow()}</span>
-                                   </p></div>`)
 
 
+                socket.emit('sendMessage', message)
+                renderMessage(message, 'yo')
 
             }
         })
 
         const dateNow = () => {
             let date = new Date()
-            return `${date.getHours()}:${date.getMinutes()}` 
+            let hours = date.getHours()
+            let minutes
+            if(date.getMinutes() < 10){
+                minutes = '0'+ date.getMinutes()
+            }else{
+                minutes = date.getMinutes()
+            }
+
+            return `${hours}:${minutes}` 
+        }
+        
+        const renderMessages = (user_name, messages) => {
+
+            let messageRender = {}
+
+            for(let message of messages){
+
+                if(user_name === message.user){
+                    messageRender = {
+                        user: message.user,
+                        body: message.message.body,
+                        date: message.message.date
+                    }
+
+                    renderMessage(messageRender, 'yo')
+                }
+
+                else{
+                    messageRender = {
+                        user: message.user,
+                        body: message.message.body,
+                        date: message.message.date
+                    }
+
+                    renderMessage(messageRender, 'friend')
+                }
+
+            }
+
+        }
+
+        const renderMessage = (message, from) => {
+            if(from === 'yo'){
+                zoneOnline.append(`<div class="message" style="text-align:right"><p class="${from}"> 
+                <span class="name">${message.user}</span>
+                <span class="text">${message.body}</span>
+                <span class="date">${message.date}</span>
+               </p></div>`)
+            }else{
+                zoneOnline.append(`<div class="message" style="text-align:left"><p class="${from}"> 
+                <span class="name">${message.user}</span>
+                <span class="text">${message.body}</span>
+                <span class="date">${message.date}</span>
+               </p></div>`)
+            }
         }
 
 
@@ -111,6 +150,22 @@ var socket = io()
                 })
             
         }
-        
+
+        const loadMessagesDB = (user_name) => {
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:3000/loadmessages',
+                dataType: 'json',
+                success: function(data){
+                    renderMessages(user_name, data.conversation[0].conversation)
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            })
+
+        }
+
         // ===============================
         
