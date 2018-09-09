@@ -3,6 +3,22 @@ const ChatModel = require('../../db/models/chat.model')
 const addMessage = (req) => {
     return new Promise((resolve, reject) => {
         
+        ChatModel.findOne({enabled: true}, {conversation: true})   
+            .exec((err, conversation) => {
+                if (err) reject(err)
+                else {
+                    let lengthMessages = conversation.conversation.length + 1
+
+                    if(lengthMessages === 100) {
+                        ChatModel.updateOne({enabled: true}, {conversation: []}, (err, conversation) => {
+                            if (err) reject(err)
+                            else console.log('La DB ha sido borrada', conversation);
+                        })
+                    }
+                }
+            })
+            
+        
         let data = req.body
 
         let conversation = {

@@ -30,16 +30,16 @@
 
         <div class="zoneName">
             <form id="formName">
-                <input type="text" placeholder="Tu nombre" name="name" autofocus autocomplete="false" id="fieldName">
+                <input type="text" placeholder="Tu nombre" name="name" autofocus autocomplete="off" id="fieldName">
                 <input type="submit" value="Listo" id="btnSubmitName">
             </form>
         </div>
 
         <div class="zoneWrite">
-            <p>Conversa con todo el mundo!</p>
             <form id="formWrite">
-                <input type="text" placeholder="Hola!, escribe algo ..." name="text" id="fieldText">
-                <input type="submit" value="Enviar" id="btnSubmit" autocomplete="false">
+                <input type="text" placeholder="Escribe algo ..." name="text" id="fieldText" autocomplete="off">
+                <button id="btnSubmit"> <i class="fas fa-paper-plane"></i> </button>
+                <!-- <input type="submit" value="Enviar" id="btnSubmit" > -->
             </form>
         </div>
 
@@ -51,9 +51,7 @@
                     <span class="date">00 00 00</span>
             </p></div>` -->
 
-
         </div>
-
 
     </main>
 

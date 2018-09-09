@@ -77,12 +77,8 @@ main .zoneName form #btnSubmitName{
 }
 
 main .zoneWrite{
-    padding: 20px;
-}
-
-main .zoneWrite p{
-    color: #dadada;
-    font-size: 22px;
+    margin-top: 20px;
+    /* padding: 20px; */
 }
 
 main .zoneWrite form{
@@ -91,31 +87,36 @@ main .zoneWrite form{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
 main .zoneWrite form #fieldText{
     width: 80%;
     border: none;
-    border-left: 2px solid #dadada;
+    border: 1px solid #adadad;
+    border-radius: 20px;
     outline: none;
     padding: 15px;
     font-size: 20px;
 }
 main .zoneWrite form #btnSubmit{
-    width: 20%;
     border: none;
-    background: #1aee61;
-    color: #fff;
+    padding: 15px;
+    border-radius: 50%;
+    color: #262d37;
+    background: #fff;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 23px;
 }
 
 main #zoneOnline{
-    margin-top: 30px;
-    background: #f3f3f3;
+    background: #fafafa;
+    /* border: 1px solid #adadad; */
     min-height: 2000px;
-    width: 100%;
-    max-width: 100%;
+    width: 80%;
+    min-width: 500px;
+    margin: auto;
     padding: 20px;
 }
 
@@ -133,18 +134,21 @@ main #zoneOnline .message p{
 
 main #zoneOnline .message p.yo {
     text-align: left;
-    background: #fff;
+    background: #2c3036;
+    border-radius: 3px;
 }
+
 main #zoneOnline .message p.yo .text {
-    color: rgb(38, 45, 55);
+    /* color: rgb(38, 45, 55); */
+    color: #fff;
 }
 
 main #zoneOnline .message p.friend {
     text-align: left;
-    background: rgb(38, 45, 55);
+    background: #e9eaeb;
 }
 main #zoneOnline .message p.friend .text {
-    color: #fff;
+    color: #262d37;
 }
 
 main #zoneOnline .message p .name {

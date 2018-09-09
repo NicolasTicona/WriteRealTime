@@ -2,10 +2,13 @@ var socket = io()
 
 
         var formWrite;
+        var btnFormWrite = $('#formWrite #btnSubmit')
         var fieldText;
         var zoneOnline;
         var formName;
         var name;
+
+        var isLogged = false;
 
         const InicializeApp = () => {
             
@@ -34,22 +37,24 @@ var socket = io()
             name = $('#fieldName').val()
             zoneOnline.show()
 
+            isLogged = true
             loadMessagesDB(name)
         })
         // ===============================
-        
         
         // Body Message
         var text = ''
 
         // Listen Message
         socket.on('receiveMessage', (message) =>{
-            
-            renderMessage(message, 'friend')                                   
+            if(isLogged){
+                renderMessage(message, 'friend')      
+            }                             
         })
 
 
-        formWrite.on('submit', (e) => {
+        // Send Message
+        btnFormWrite.on('click', (e) => {
             e.preventDefault()
 
             text = fieldText.val()
