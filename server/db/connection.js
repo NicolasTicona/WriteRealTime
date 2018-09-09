@@ -1,6 +1,8 @@
+require('../config/config')
+
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/writerealtime', {useNewUrlParser: true})
+mongoose.connect(process.env.urlDB, {useNewUrlParser: true})
     .then( () => {
         console.log('Mongo OK');
     })

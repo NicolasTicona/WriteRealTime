@@ -1,3 +1,5 @@
+require('./config/config')
+
 const express = require('express')
 const app = express()
 const server = require('http').Server(app)
@@ -37,6 +39,6 @@ io.on('connection', (client) => {
 require('./db/connection')
 
 // Listennig
-server.listen(process.env.PORT || 3000, () =>{
+server.listen(process.env.PORT, () =>{
     console.log('Server running');
 })

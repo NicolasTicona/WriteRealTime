@@ -9,7 +9,7 @@ const addMessage = (req) => {
                 else {
                     let lengthMessages = conversation.conversation.length + 1
 
-                    if(lengthMessages === 100) {
+                    if(lengthMessages === 30) {
                         ChatModel.updateOne({enabled: true}, {conversation: []}, (err, conversation) => {
                             if (err) reject(err)
                             else console.log('La DB ha sido borrada', conversation);
